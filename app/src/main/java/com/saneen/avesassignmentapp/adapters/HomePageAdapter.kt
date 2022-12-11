@@ -44,13 +44,27 @@ class HomePageAdapter(
 
                 binding.ivProfileImage.setOnClickListener{
                     data?.let {
-                        listener.onProfileClick(data!!.user)
+                        it.user.let {
+                            val name = it?.name
+                            val bio = it?.bio
+                            val location = it?.location
+                            it?.profileImage.let {
+                                listener.onProfileClick(it?.medium , name , bio,location)
+                            }
+                        }
                     }
                 }
 
                 binding.tvProfileName.setOnClickListener{
                     data?.let {
-                        listener.onProfileClick(data!!.user)
+                        it.user.let {
+                            val name = it?.name
+                            val bio = it?.bio
+                            val location = it?.location
+                            it?.profileImage.let {
+                                listener.onProfileClick(it?.medium , name , bio,location)
+                            }
+                        }
                     }
                 }
             }

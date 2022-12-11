@@ -23,4 +23,7 @@
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_18">18dp</dimen>
     <dimen name="dp_20">20dp</dimen>
+    <dimen name="dp_100">100dp</dimen>
+    <dimen name="dp_150">150dp</dimen>
+    <dimen name="dp_250">250</dimen>
 </resources>

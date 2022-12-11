@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() , HomeItemClickListener {
        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
        viewModel.getData()
 
-
        binding.rvHome.apply {
            layoutManager = LinearLayoutManager(this@MainActivity)
            setHasFixedSize(true)
@@ -66,8 +65,17 @@ class MainActivity : AppCompatActivity() , HomeItemClickListener {
         startActivity(intent)
     }
 
-    override fun onProfileClick(user: User?) {
+    override fun onProfileClick(
+        imageUrl: String?,
+        userName: String?,
+        location: String?,
+        bio: String?
+    ) {
         val intent = Intent(this , ProfileActivity::class.java)
+        intent.putExtra(Constants.USER_PROFILE_IMAGE_URL_INTENT , imageUrl)
+        intent.putExtra(Constants.USER_NAME_INTENT , userName)
+        intent.putExtra(Constants.USER_LOCATION_INTENT , location)
+        intent.putExtra(Constants.USER_BIO_INTENT , bio)
         startActivity(intent)
     }
 }
