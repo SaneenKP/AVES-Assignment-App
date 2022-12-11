@@ -3,18 +3,24 @@ package com.saneen.avesassignmentapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.saneen.avesassignmentapp.R
+import com.saneen.avesassignmentapp.adapters.HomePageAdapter
+import com.saneen.avesassignmentapp.databinding.ActivityMainBinding
 import com.saneen.avesassignmentapp.utils.Constants
 import com.saneen.avesassignmentapp.viewmodels.HomeViewModel
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var viewModel : HomeViewModel
+    private lateinit var viewModel : HomeViewModel
+    private lateinit var homeAdapter : HomePageAdapter
+    private lateinit var binding : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this , R.layout.activity_main)
 
         init()
     }
@@ -22,6 +28,12 @@ class MainActivity : AppCompatActivity() {
     private fun init(){
        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
        viewModel.getData()
+
+
+       binding.rvHome.apply {
+           layoutManager = LinearLayoutManager(this@MainActivity)
+           setHasFixedSize(true)
+       }
 
        observeData()
     }
@@ -32,11 +44,11 @@ class MainActivity : AppCompatActivity() {
             when (it.status) {
 
                 Constants.Status.ERROR -> {
-                    Log.d("saneen", "error = ${it.message}")
                 }
 
                 Constants.Status.SUCCESS -> {
-                    Log.d("saneen", it.data.toString())
+                    homeAdapter = HomePageAdapter(it.data)
+                    binding.rvHome.adapter = homeAdapter
                 }
 
                 Constants.Status.LOADING -> {
