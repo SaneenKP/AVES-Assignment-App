@@ -2,4 +2,13 @@
     <string name="app_name">AVES Assignment App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="screen1">Photos</string>
+    <string name="screen2">Profile</string>
+
+    <string name="name_unavailable">No name available for the user</string>
+    <string name="location_unavailable">No location available for the user</string>
+    <string name="bio_unavailable">No bio available for the user</string>
+
+    <string name="description_unavailable">No description Available</string>
 </resources>

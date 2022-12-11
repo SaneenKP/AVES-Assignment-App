@@ -3,6 +3,7 @@ package com.saneen.avesassignmentapp.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -23,7 +24,9 @@ class MainActivity : AppCompatActivity() , HomeItemClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this , R.layout.activity_main)
-
+        supportActionBar?.hide()
+        window.statusBarColor = resources.getColor(R.color.white)
+        findViewById<TextView>(R.id.tv_toolbar).text = "Photoes"
         init()
     }
 

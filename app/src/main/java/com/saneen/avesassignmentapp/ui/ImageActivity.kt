@@ -17,7 +17,7 @@ class ImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this , R.layout.activity_image)
-
+        supportActionBar?.hide()
         handleIntent()
         setData()
     }
@@ -31,7 +31,7 @@ class ImageActivity : AppCompatActivity() {
         binding.ivMainImage.imageFromImagePath(imageUrl)
 
         if (description.isNullOrEmpty()){
-            binding.tvDesc.text = "No description Available"
+            binding.tvDesc.text = resources.getString(R.string.description_unavailable)
         }else{
             binding.tvDesc.text = description
         }

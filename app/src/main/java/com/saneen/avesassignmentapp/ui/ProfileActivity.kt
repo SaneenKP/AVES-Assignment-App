@@ -2,6 +2,7 @@ package com.saneen.avesassignmentapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.saneen.avesassignmentapp.R
@@ -21,7 +22,12 @@ class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this , R.layout.activity_profile)
-
+        supportActionBar?.hide()
+        window.statusBarColor = resources.getColor(R.color.black)
+        findViewById<TextView>(R.id.tv_toolbar).apply {
+            text = context.resources.getString(R.string.screen2)
+            setTextColor(context.resources.getColor(R.color.white))
+        }
         handleIntent()
         bindData()
     }
@@ -35,8 +41,8 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun bindData(){
         binding.profileImage.imageFromImagePath(profileImageUrl)
-        if (name == null) "No name available for the user" else binding.name.text = name
-        if (location == null) "No location available for the user" else binding.location.text =location
-        if (bio == null) "No bio available for the user" else binding.bio.text = bio
+        if (name == null) resources.getString(R.string.name_unavailable) else binding.name.text = name
+        if (location == null) resources.getString(R.string.location_unavailable) else binding.location.text =location
+        if (bio == null) resources.getString(R.string.bio_unavailable) else binding.bio.text = bio
     }
 }
