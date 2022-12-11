@@ -16,6 +16,7 @@ data class Result(
     @SerializedName("likes"                    ) var likes                  : Int?              = null,
     @SerializedName("liked_by_user"            ) var likedByUser            : Boolean?          = null,
     @SerializedName("current_user_collections" ) var currentUserCollections : ArrayList<String> = arrayListOf(),
-    @SerializedName("user"                     ) var user                   : User?             = User()
+    @SerializedName("user"                     ) var user                   : User?             = User(),
+    @SerializedName("urls"                     ) var urls                   : Urls?             = Urls(),
 )
 
