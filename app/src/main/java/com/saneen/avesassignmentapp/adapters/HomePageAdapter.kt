@@ -5,11 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.saneen.avesassignmentapp.databinding.ItemViewHomeViewBinding
+import com.saneen.avesassignmentapp.listeners.HomeItemClickListener
 import com.saneen.avesassignmentapp.models.Result
 
 class HomePageAdapter(
-    private val list : List<Result>?
+    private val list : List<Result>?,
+    private val listener : HomeItemClickListener
 ) : RecyclerView.Adapter<HomePageAdapter.HomePageViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomePageViewHolder {
         val binding = ItemViewHomeViewBinding.inflate(LayoutInflater.from(parent.context) , parent , false)
@@ -30,7 +33,30 @@ class HomePageAdapter(
                                    private val binding: ItemViewHomeViewBinding)
         : RecyclerView.ViewHolder(binding.root){
 
+            var data : Result? = null
+
+            init {
+                binding.ivImage.setOnClickListener{
+                    data?.let {
+                        listener.onImageClick(data!!.urls?.full , data!!.altDescription)
+                    }
+                }
+
+                binding.ivProfileImage.setOnClickListener{
+                    data?.let {
+                        listener.onProfileClick(data!!.user)
+                    }
+                }
+
+                binding.tvProfileName.setOnClickListener{
+                    data?.let {
+                        listener.onProfileClick(data!!.user)
+                    }
+                }
+            }
+
             fun bind(result : Result){
+                this.data = result
                 binding.data = result
             }
     }

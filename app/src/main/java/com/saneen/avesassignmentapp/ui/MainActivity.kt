@@ -1,18 +1,20 @@
 package com.saneen.avesassignmentapp.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.saneen.avesassignmentapp.R
 import com.saneen.avesassignmentapp.adapters.HomePageAdapter
 import com.saneen.avesassignmentapp.databinding.ActivityMainBinding
+import com.saneen.avesassignmentapp.listeners.HomeItemClickListener
+import com.saneen.avesassignmentapp.models.User
 import com.saneen.avesassignmentapp.utils.Constants
 import com.saneen.avesassignmentapp.viewmodels.HomeViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() , HomeItemClickListener {
 
     private lateinit var viewModel : HomeViewModel
     private lateinit var homeAdapter : HomePageAdapter
@@ -47,14 +49,25 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 Constants.Status.SUCCESS -> {
-                    homeAdapter = HomePageAdapter(it.data)
+                    homeAdapter = HomePageAdapter(it.data , this)
                     binding.rvHome.adapter = homeAdapter
                 }
 
                 Constants.Status.LOADING -> {
-                    Log.d("saneen", "loading")
                 }
             }
         }
+    }
+
+    override fun onImageClick(imageUrl: String?, desc: String?) {
+        val intent = Intent(this , ImageActivity::class.java)
+        intent.putExtra(Constants.IMAGE_URL_INTENT , imageUrl)
+        intent.putExtra(Constants.IMAGE_DESCRIPTION_INTENT , desc)
+        startActivity(intent)
+    }
+
+    override fun onProfileClick(user: User?) {
+        val intent = Intent(this , ProfileActivity::class.java)
+        startActivity(intent)
     }
 }

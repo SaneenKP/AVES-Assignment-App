@@ -6,4 +6,12 @@ class Constants {
         ERROR,
         LOADING
     }
+
+    companion object{
+
+        //Intents
+        const val IMAGE_URL_INTENT = "image_url_intent"
+        const val IMAGE_DESCRIPTION_INTENT = "image_description_intent"
+    }
+
 }
